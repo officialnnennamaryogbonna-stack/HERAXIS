@@ -27,6 +27,11 @@ const HomePage = ({ profile, onNotify, onNavigate }: HomePageProps) => {
     onNotify(updated.includes(id) ? 'Reminder marked complete ✅' : 'Reminder marked pending');
   };
 
+const HomePage = ({ profile }: { profile: UserProfile }) => {
+  const week = profile.pregnancyWeek ?? 24;
+  const babySummary =
+    babyWeekUpdates.find((item) => Math.abs(item.week - week) < 4) ?? babyWeekUpdates[Math.floor(babyWeekUpdates.length / 2)];
+
   return (
     <div className="space-y-4">
       <Card title="Today’s maternal care tip" action={<VoiceButton enabled={profile.accessibility.voiceEnabled} text={todayTip.body} />}>
@@ -47,6 +52,10 @@ const HomePage = ({ profile, onNotify, onNavigate }: HomePageProps) => {
                 onNotify('Mood check-in saved');
               }}
             >
+        <p className="text-sm text-rose-700">How are you feeling right now? Pick one and share later in community if you want.</p>
+        <div className="mt-3 grid grid-cols-4 gap-2 text-lg">
+          {['😌', '🙂', '😟', '😢'].map((mood) => (
+            <button key={mood} className="rounded-xl bg-rose-50 p-3" type="button">
               {mood}
             </button>
           ))}
@@ -69,6 +78,22 @@ const HomePage = ({ profile, onNotify, onNavigate }: HomePageProps) => {
           </button>
         </Card>
       </div>
+      <Card title="Baby tracker summary">
+        <p className="text-sm font-semibold text-calm-700">Week {babySummary.week}</p>
+        <p className="text-sm text-rose-700">{babySummary.sizeText} ({babySummary.fruit}).</p>
+        <p className="mt-1 text-xs text-rose-500">{babySummary.milestone}</p>
+      </Card>
+
+      <Card title="Nutrition tip of the day">
+        <p className="text-sm font-semibold text-calm-700">{nutritionTipOfDay.title}</p>
+        <p className="mt-1 text-sm text-rose-700">{nutritionTipOfDay.body}</p>
+      </Card>
+
+      <Card title="Emergency quick access">
+        <button className="w-full rounded-xl bg-red-600 p-4 text-base font-semibold text-white" type="button">
+          🚨 Tap for emergency help
+        </button>
+      </Card>
 
       <Card title="Latest community preview">
         <p className="text-xs uppercase tracking-wide text-calm-600">{communityPosts[0].category}</p>
@@ -86,6 +111,7 @@ const HomePage = ({ profile, onNotify, onNavigate }: HomePageProps) => {
                 <ReminderCard reminder={{ ...reminder, title: `${doneReminders.includes(reminder.id) ? '✅ ' : ''}${reminder.title}` }} />
               </div>
             </button>
+            <ReminderCard key={reminder.id} reminder={reminder} />
           ))}
         </div>
       </Card>

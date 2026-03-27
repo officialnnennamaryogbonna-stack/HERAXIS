@@ -9,14 +9,18 @@ HERAXIS is a mobile-first maternal and women’s health support platform for pre
 - Local/mock data (no backend yet)
 
 ## MVP feature set
-- Onboarding with stage, language, voice, pregnancy week, and support preferences
-- Interactive Home dashboard with mood save, reminder completion, tracker + community shortcuts
-- Care Hub with trimester tabs, expandable guidance sections, new mum bookmarks, postpartum checklist, and nutrition filters
-- Community forum with post creation, category filtering, likes, and open-thread modal
-- Baby Tracker with week selector, progress bar, fruit-size milestones, and detail cards
-- Profile with accessibility toggles (large text, high contrast, simplified view, voice)
+- Supportive onboarding (maternal stage, language, voice, due date/baby age, support needs)
+- Home dashboard with maternal tip, mood check-in, baby tracker summary, emergency shortcut, nutrition tip, reminders, and community preview
+- Care Hub with:
+  - Pregnancy Support Hub
+  - New Mum Guidance
+  - Postpartum Recovery
+  - Daily Nutrition for mother and child
+  - Warning signs and urgent-care guidance
+- Community forum with category filtering and anonymous posting toggle
+- Baby Tracker with week-based growth updates and fruit-size comparison cards
+- Profile with accessibility settings (large text, high contrast, voice support)
 - Fixed bottom navigation: Home, Care Hub, Community, Baby Tracker, Profile
-- Toast feedback messages, loading states, and empty states
 
 ## Project structure
 
@@ -28,7 +32,7 @@ src/
     ReminderCard.tsx
     VoiceButton.tsx
   data/
-    mockData.ts
+    mockData.ts          # all local sample maternal, nutrition, baby-tracker, and community content
   pages/
     OnboardingPage.tsx
     HomePage.tsx
@@ -47,9 +51,12 @@ src/
 All mock/local content is stored in:
 - `src/data/mockData.ts`
 
-## Placeholder actions still present
-- Community thread comments are currently read-only in the modal (marked “coming soon”).
-- Emergency flow uses MVP feedback banner only (not connected to telephony/API).
+## Future integrations
+- Replace `mockData.ts` with API calls/services.
+- Add authenticated profiles and cloud sync for settings.
+- Add multilingual voice packs and richer assistive accessibility options.
+- Add real clinic/hospital lookup and emergency number integrations.
+- Add moderated backend community posting.
 
 ## Run locally
 

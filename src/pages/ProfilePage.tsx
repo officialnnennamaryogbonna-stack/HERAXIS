@@ -9,6 +9,9 @@ interface ProfilePageProps {
 }
 
 const ProfilePage = ({ profile, onReset, onUpdate, onNotify }: ProfilePageProps) => {
+}
+
+const ProfilePage = ({ profile, onReset, onUpdate }: ProfilePageProps) => {
   return (
     <div className="space-y-4">
       <Card title="My profile">

@@ -41,6 +41,15 @@ const App = () => {
     return () => window.clearTimeout(timer);
   }, [toast]);
 
+        voiceEnabled: parsed.voiceEnabled
+      };
+    }
+    if (typeof parsed.pregnancyWeek !== 'number') {
+      parsed.pregnancyWeek = 24;
+    }
+    setProfile(parsed);
+  }, []);
+
   const persistProfile = (nextProfile: UserProfile) => {
     setProfile(nextProfile);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(nextProfile));
@@ -64,6 +73,9 @@ const App = () => {
     onNotify: setToast,
     onNavigate: setActiveTab
   };
+
+    return <OnboardingPage onComplete={persistProfile} />;
+  }
 
   return (
     <main
@@ -90,6 +102,17 @@ const App = () => {
         type="button"
         onClick={() => setToast('Emergency flow activated. Calling support options...')}
       >
+      <header className="mb-4">
+        <p className="text-xs uppercase tracking-wide text-rose-500">HERAXIS</p>
+        <h1 className="text-xl font-bold text-calm-700">Compassionate maternal support</h1>
+        <p className="text-sm text-rose-700">A safe mobile-first companion for maternal care, baby tracking, and support.</p>
+      </header>
+
+      <Card title="Daily affirmation">
+        <p className="text-sm text-rose-700">{affirmation}</p>
+      </Card>
+
+      <button className="mt-4 w-full rounded-xl bg-red-600 p-3 text-sm font-semibold text-white" type="button">
         🚨 Emergency help
       </button>
 
@@ -112,6 +135,14 @@ const App = () => {
       </section>
 
       {activeTab !== 'home' && !profile.accessibility.simplifiedView && (
+        {activeTab === 'home' && <HomePage profile={profile} />}
+        {activeTab === 'care' && <CarePage profile={profile} />}
+        {activeTab === 'community' && <CommunityPage />}
+        {activeTab === 'tracker' && <BabyTrackerPage profile={profile} />}
+        {activeTab === 'profile' && <ProfilePage profile={profile} onReset={handleReset} onUpdate={persistProfile} />}
+      </section>
+
+      {activeTab !== 'home' && (
         <section className="mt-4">
           <Card title="Today’s reminders">
             <div className="space-y-2">
