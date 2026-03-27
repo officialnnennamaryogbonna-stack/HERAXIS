@@ -24,6 +24,7 @@ const OnboardingPage = ({ onComplete }: OnboardingPageProps) => {
   const [language, setLanguage] = useState('English');
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [dueDateOrBabyAge, setDueDateOrBabyAge] = useState('');
+  const [pregnancyWeek, setPregnancyWeek] = useState(24);
   const [needs, setNeeds] = useState<SupportNeed[]>(['health', 'emotional']);
 
   const canSubmit = useMemo(() => dueDateOrBabyAge.trim().length > 0, [dueDateOrBabyAge]);
@@ -35,7 +36,7 @@ const OnboardingPage = ({ onComplete }: OnboardingPageProps) => {
   return (
     <main className="mx-auto min-h-screen max-w-md bg-calm-50 px-4 pb-6 pt-8">
       <h1 className="mb-2 text-2xl font-bold text-calm-700">Welcome to HERAXIS</h1>
-      <p className="mb-6 text-sm text-rose-700">A safe, supportive space for maternal care and wellbeing.</p>
+      <p className="mb-6 text-sm text-rose-700">A safe and supportive space for maternal care, guidance, and community.</p>
 
       <div className="space-y-4">
         <Card title="Your current stage">
@@ -68,7 +69,8 @@ const OnboardingPage = ({ onComplete }: OnboardingPageProps) => {
               <option>French</option>
             </select>
           </label>
-          <label className="flex items-center gap-2 text-sm font-medium">
+
+          <label className="mb-3 flex items-center gap-2 text-sm font-medium">
             <input
               type="checkbox"
               checked={voiceEnabled}
@@ -76,6 +78,20 @@ const OnboardingPage = ({ onComplete }: OnboardingPageProps) => {
             />
             Enable voice support
           </label>
+
+          {stage !== 'new_mother' && (
+            <label className="block text-sm">
+              <span className="mb-1 block font-medium">Current pregnancy week: {pregnancyWeek}</span>
+              <input
+                type="range"
+                min={4}
+                max={40}
+                value={pregnancyWeek}
+                onChange={(event) => setPregnancyWeek(Number(event.target.value))}
+                className="w-full"
+              />
+            </label>
+          )}
         </Card>
 
         <Card title="Due date or baby age">
@@ -108,12 +124,18 @@ const OnboardingPage = ({ onComplete }: OnboardingPageProps) => {
               voiceEnabled,
               dueDateOrBabyAge,
               supportNeeds: needs,
-              emergencyContact: ''
+              emergencyContact: '',
+              pregnancyWeek,
+              accessibility: {
+                largeText: false,
+                highContrast: false,
+                voiceEnabled
+              }
             })
           }
-          className="w-full rounded-xl bg-calm-600 p-3 font-semibold text-white disabled:opacity-60"
+          className="w-full rounded-xl bg-calm-600 p-3 text-base font-semibold text-white disabled:opacity-60"
         >
-          Continue to dashboard
+          Continue to your support dashboard
         </button>
       </div>
     </main>

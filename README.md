@@ -8,49 +8,55 @@ HERAXIS is a mobile-first maternal and women’s health support platform for pre
 - Vite
 - Local/mock data (no backend yet)
 
-## Features in this MVP
-- Onboarding flow (maternal stage, language, voice toggle, due date/baby age, support needs)
-- Home dashboard with maternal tip, reminders, mood check-in, quick actions, and community highlights
-- Care section with antenatal + postnatal guidance cards
-- Mental health support via daily mood check-in and calming affirmations
-- Emergency support page with one-tap help CTA, quick-call placeholders, and danger signs
-- Voice accessibility through text-to-speech prompt buttons (Web Speech API)
-- Safe community feed with supportive categories and moderated tone
-- Profile page for preferences and onboarding reset
-- Fixed bottom navigation with safe scrolling above nav
+## MVP feature set
+- Supportive onboarding (maternal stage, language, voice, due date/baby age, support needs)
+- Home dashboard with maternal tip, mood check-in, baby tracker summary, emergency shortcut, nutrition tip, reminders, and community preview
+- Care Hub with:
+  - Pregnancy Support Hub
+  - New Mum Guidance
+  - Postpartum Recovery
+  - Daily Nutrition for mother and child
+  - Warning signs and urgent-care guidance
+- Community forum with category filtering and anonymous posting toggle
+- Baby Tracker with week-based growth updates and fruit-size comparison cards
+- Profile with accessibility settings (large text, high contrast, voice support)
+- Fixed bottom navigation: Home, Care Hub, Community, Baby Tracker, Profile
 
 ## Project structure
 
 ```text
 src/
   components/
-    BottomNav.tsx      # fixed mobile tab navigation
-    Card.tsx           # reusable card wrapper
-    ReminderCard.tsx   # reusable reminder tile
-    VoiceButton.tsx    # text-to-speech helper button
+    BottomNav.tsx
+    Card.tsx
+    ReminderCard.tsx
+    VoiceButton.tsx
   data/
-    mockData.ts        # mock maternal tips, reminders, posts, danger signs
+    mockData.ts          # all local sample maternal, nutrition, baby-tracker, and community content
   pages/
-    OnboardingPage.tsx # first-run onboarding
-    HomePage.tsx       # dashboard
-    CarePage.tsx       # antenatal and postnatal guidance
-    CommunityPage.tsx  # safe community space
-    EmergencyPage.tsx  # urgent support actions and danger signs
-    ProfilePage.tsx    # maternal settings and preferences
+    OnboardingPage.tsx
+    HomePage.tsx
+    CarePage.tsx
+    CommunityPage.tsx
+    BabyTrackerPage.tsx
+    ProfilePage.tsx
   types/
-    index.ts           # shared interfaces and domain types
-  App.tsx              # app shell, tab routing, profile persistence
-  main.tsx             # app bootstrap
-  index.css            # Tailwind setup + base focus styles
+    index.ts
+  App.tsx
+  main.tsx
+  index.css
 ```
 
-## Future integration points
-- `src/data/mockData.ts` can be replaced with API services (REST/GraphQL) and query hooks.
-- `VoiceButton.tsx` can integrate multilingual TTS providers or offline voice packs.
-- `EmergencyPage.tsx` can connect to geolocation, health facility APIs, and local emergency numbers.
-- `CommunityPage.tsx` can connect to moderated backend posting + abuse detection.
-- `App.tsx` localStorage profile can be upgraded to authenticated user profiles and cloud sync.
-- Mood check-in cards can feed optional AI-powered wellbeing suggestions (non-diagnostic, compassionate language).
+## Mock data location
+All mock/local content is stored in:
+- `src/data/mockData.ts`
+
+## Future integrations
+- Replace `mockData.ts` with API calls/services.
+- Add authenticated profiles and cloud sync for settings.
+- Add multilingual voice packs and richer assistive accessibility options.
+- Add real clinic/hospital lookup and emergency number integrations.
+- Add moderated backend community posting.
 
 ## Run locally
 
@@ -59,7 +65,7 @@ npm install
 npm run dev
 ```
 
-Build for production:
+Build and preview:
 
 ```bash
 npm run build

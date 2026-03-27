@@ -6,7 +6,8 @@ const iconByType: Record<Reminder['type'], string> = {
   hydration: '💧',
   rest: '🛌',
   babycare: '🍼',
-  mental: '🌼'
+  mental: '🌼',
+  recovery: '❤️'
 };
 
 const ReminderCard = ({ reminder }: { reminder: Reminder }) => {

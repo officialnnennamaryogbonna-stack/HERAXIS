@@ -1,10 +1,10 @@
-export type TabKey = 'home' | 'care' | 'community' | 'emergency' | 'profile';
+export type TabKey = 'home' | 'care' | 'community' | 'tracker' | 'profile';
 
 const tabs: Array<{ key: TabKey; label: string; icon: string }> = [
   { key: 'home', label: 'Home', icon: '🏠' },
-  { key: 'care', label: 'Care', icon: '🩺' },
+  { key: 'care', label: 'Care Hub', icon: '🩺' },
   { key: 'community', label: 'Community', icon: '🤝' },
-  { key: 'emergency', label: 'Emergency', icon: '🚨' },
+  { key: 'tracker', label: 'Baby Tracker', icon: '🍼' },
   { key: 'profile', label: 'Profile', icon: '👤' }
 ];
 

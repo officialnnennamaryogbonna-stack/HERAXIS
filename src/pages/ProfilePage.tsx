@@ -4,9 +4,10 @@ import Card from '../components/Card';
 interface ProfilePageProps {
   profile: UserProfile;
   onReset: () => void;
+  onUpdate: (profile: UserProfile) => void;
 }
 
-const ProfilePage = ({ profile, onReset }: ProfilePageProps) => {
+const ProfilePage = ({ profile, onReset, onUpdate }: ProfilePageProps) => {
   return (
     <div className="space-y-4">
       <Card title="My profile">
@@ -20,10 +21,6 @@ const ProfilePage = ({ profile, onReset }: ProfilePageProps) => {
             <dd>{profile.language}</dd>
           </div>
           <div className="flex justify-between gap-3">
-            <dt className="font-semibold text-calm-700">Voice support</dt>
-            <dd>{profile.voiceEnabled ? 'Enabled' : 'Disabled'}</dd>
-          </div>
-          <div className="flex justify-between gap-3">
             <dt className="font-semibold text-calm-700">Due date / baby age</dt>
             <dd>{profile.dueDateOrBabyAge}</dd>
           </div>
@@ -32,6 +29,60 @@ const ProfilePage = ({ profile, onReset }: ProfilePageProps) => {
             <dd>{profile.emergencyContact || 'Not set yet'}</dd>
           </div>
         </dl>
+      </Card>
+
+      <Card title="Accessibility settings">
+        <div className="space-y-2 text-sm text-rose-700">
+          <label className="flex items-center justify-between gap-3 rounded-xl bg-rose-50 p-3">
+            Large text mode
+            <input
+              type="checkbox"
+              checked={profile.accessibility.largeText}
+              onChange={(event) =>
+                onUpdate({
+                  ...profile,
+                  accessibility: {
+                    ...profile.accessibility,
+                    largeText: event.target.checked
+                  }
+                })
+              }
+            />
+          </label>
+          <label className="flex items-center justify-between gap-3 rounded-xl bg-rose-50 p-3">
+            High contrast mode
+            <input
+              type="checkbox"
+              checked={profile.accessibility.highContrast}
+              onChange={(event) =>
+                onUpdate({
+                  ...profile,
+                  accessibility: {
+                    ...profile.accessibility,
+                    highContrast: event.target.checked
+                  }
+                })
+              }
+            />
+          </label>
+          <label className="flex items-center justify-between gap-3 rounded-xl bg-rose-50 p-3">
+            Voice support
+            <input
+              type="checkbox"
+              checked={profile.accessibility.voiceEnabled}
+              onChange={(event) =>
+                onUpdate({
+                  ...profile,
+                  voiceEnabled: event.target.checked,
+                  accessibility: {
+                    ...profile.accessibility,
+                    voiceEnabled: event.target.checked
+                  }
+                })
+              }
+            />
+          </label>
+        </div>
       </Card>
 
       <Card title="Support preferences">
