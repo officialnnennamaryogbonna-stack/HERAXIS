@@ -5,6 +5,10 @@ interface ProfilePageProps {
   profile: UserProfile;
   onReset: () => void;
   onUpdate: (profile: UserProfile) => void;
+  onNotify: (message: string) => void;
+}
+
+const ProfilePage = ({ profile, onReset, onUpdate, onNotify }: ProfilePageProps) => {
 }
 
 const ProfilePage = ({ profile, onReset, onUpdate }: ProfilePageProps) => {
@@ -66,6 +70,22 @@ const ProfilePage = ({ profile, onReset, onUpdate }: ProfilePageProps) => {
             />
           </label>
           <label className="flex items-center justify-between gap-3 rounded-xl bg-rose-50 p-3">
+            Simplified view
+            <input
+              type="checkbox"
+              checked={profile.accessibility.simplifiedView}
+              onChange={(event) =>
+                onUpdate({
+                  ...profile,
+                  accessibility: {
+                    ...profile.accessibility,
+                    simplifiedView: event.target.checked
+                  }
+                })
+              }
+            />
+          </label>
+          <label className="flex items-center justify-between gap-3 rounded-xl bg-rose-50 p-3">
             Voice support
             <input
               type="checkbox"
@@ -83,6 +103,14 @@ const ProfilePage = ({ profile, onReset, onUpdate }: ProfilePageProps) => {
             />
           </label>
         </div>
+
+        <button
+          className="mt-3 w-full rounded-xl bg-calm-100 p-3 text-sm font-semibold text-calm-700"
+          type="button"
+          onClick={() => onNotify('Voice demo placeholder: connected to browser text-to-speech in content cards.')}
+        >
+          Test voice support
+        </button>
       </Card>
 
       <Card title="Support preferences">

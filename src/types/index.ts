@@ -4,6 +4,7 @@ export type SupportNeed = 'health' | 'emotional' | 'emergency' | 'community';
 export interface AccessibilitySettings {
   largeText: boolean;
   highContrast: boolean;
+  simplifiedView: boolean;
   voiceEnabled: boolean;
 }
 
@@ -23,6 +24,7 @@ export interface Reminder {
   title: string;
   time: string;
   type: 'medication' | 'clinic' | 'hydration' | 'rest' | 'babycare' | 'mental' | 'recovery';
+  done?: boolean;
 }
 
 export interface CommunityPost {
@@ -31,6 +33,7 @@ export interface CommunityPost {
   category: 'pregnancy journey' | 'new mum life' | 'postpartum recovery' | 'baby care' | 'emotional support';
   message: string;
   hearts: number;
+  comments: number;
 }
 
 export interface CareTip {

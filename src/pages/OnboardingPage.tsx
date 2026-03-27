@@ -129,6 +129,7 @@ const OnboardingPage = ({ onComplete }: OnboardingPageProps) => {
               accessibility: {
                 largeText: false,
                 highContrast: false,
+                simplifiedView: false,
                 voiceEnabled
               }
             })
